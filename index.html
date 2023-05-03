@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    
+    <style>
+    
+    .container {
+  margin-top: 50px;
+}
+
+#shadow-preview {
+    width: 600px;
+    height: 200px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    padding: 20px !important;
+}
+
+    </style>
+    
+  </head>
+  <body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <label for="size">Size:</label>
+      <input type="range" class="form-range" id="size" min="0" max="100" value="10">
+    </div>
+    <div class="col-md-4">
+      <label for="blur">Blur:</label>
+      <input type="range" class="form-range" id="blur" min="0" max="50" value="5">
+    </div>
+    <div class="col-md-4">
+      <label for="spread">Spread:</label>
+      <input type="range" class="form-range" id="spread" min="0" max="50" value="10">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label for="color">Color:</label>
+      <input type="color" class="form-control form-control-color" id="color" value="#ccc">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div id="shadow-preview">
+        <p><strong>CSS Code:</strong></p>
+         <pre id="css-code"></pre>
+      </div>
+    </div>
+  </div>
+  
+
+
+</div>
+
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+ 
+ <script>
+ function generateShadow() {
+  var size = $('#size').val() + 'px';
+  var blur = $('#blur').val() + 'px';
+  var spread = $('#spread').val() + 'px';
+  var color = $('#color').val();
+  var boxShadow = size + ' ' + size + ' ' + blur + ' ' + spread + ' ' + color;
+  $('#shadow-preview').css({
+    'box-shadow': boxShadow,
+    '-webkit-box-shadow': boxShadow,
+    '-moz-box-shadow': boxShadow
+  });
+  var cssCode = 'box-shadow: ' + boxShadow + ';\n';
+  cssCode += '-webkit-box-shadow: ' + boxShadow + ';\n';
+  cssCode += '-moz-box-shadow: ' + boxShadow + ';';
+  $('#css-code').text(cssCode);
+}
+
+$('input[type="range"], input[type="color"]').change(function() {
+  generateShadow();
+});
+
+ 
+ </script>
+ 
+ </body>
+</html>
