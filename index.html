@@ -12,7 +12,7 @@
     
     <style>
       body {
-        background-color: #f8f9fa;
+        background-color: #e9ecef;
         font-family: Arial, sans-serif;
       }
 
@@ -22,8 +22,8 @@
 
       #shadow-preview {
         width: 100%;
-        height: 200px;
-        border-radius: 10px;
+        height: 220px;
+        border-radius: 12px;
         background-color: #ffffff;
         display: flex;
         align-items: center;
@@ -36,33 +36,83 @@
       .form-container {
         padding: 30px;
         background-color: #ffffff;
-        border-radius: 10px;
-        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      h2, h4 {
+        color: #333;
+        font-weight: 600;
+      }
+
+      .form-group label {
+        font-weight: 500;
+        color: #555;
+      }
+
+      .form-group input[type="range"] {
+        width: 100%;
       }
 
       #css-code {
-        background-color: #f1f1f1;
+        background-color: #f8f9fa;
         padding: 15px;
         border-radius: 5px;
         font-family: monospace;
         font-size: 14px;
-        color: #333;
+        color: #495057;
         white-space: pre-wrap;
         word-wrap: break-word;
         width: 100%;
         margin-top: 15px;
-      }
-
-      .title {
-        font-size: 1.2rem;
-        font-weight: 500;
-        color: #333;
-        margin-bottom: 15px;
+        box-shadow: inset 0px 2px 6px rgba(0, 0, 0, 0.1);
       }
 
       .copy-btn {
-        margin-top: 10px;
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 5px;
+        margin-top: 15px;
         font-size: 0.9rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .copy-btn:hover {
+        background-color: #0056b3;
+      }
+
+      .preview-section {
+        margin-top: 30px;
+      }
+
+      .copy-btn:focus {
+        outline: none;
+      }
+      
+      .copy-btn.copied {
+        background-color: #28a745;
+        color: #fff;
+      }
+      
+      .custom-range::-webkit-slider-thumb {
+        background-color: #007bff;
+      }
+      
+      .custom-range::-moz-range-thumb {
+        background-color: #007bff;
+      }
+      
+      .custom-range::-ms-thumb {
+        background-color: #007bff;
+      }
+      
+      .title {
+        font-size: 1.1rem;
+        color: #333;
+        margin-bottom: 20px;
+        font-weight: bold;
       }
     </style>
     
@@ -78,19 +128,19 @@
             <!-- Controls for box-shadow customization -->
             <div class="form-group">
               <label for="horizontal-length">Horizontal Length:</label>
-              <input type="range" class="form-range" id="horizontal-length" min="-100" max="100" value="10">
+              <input type="range" class="form-range custom-range" id="horizontal-length" min="-100" max="100" value="10">
             </div>
             <div class="form-group">
               <label for="vertical-length">Vertical Length:</label>
-              <input type="range" class="form-range" id="vertical-length" min="-100" max="100" value="10">
+              <input type="range" class="form-range custom-range" id="vertical-length" min="-100" max="100" value="10">
             </div>
             <div class="form-group">
               <label for="blur">Blur Radius:</label>
-              <input type="range" class="form-range" id="blur" min="0" max="100" value="15">
+              <input type="range" class="form-range custom-range" id="blur" min="0" max="100" value="15">
             </div>
             <div class="form-group">
               <label for="spread">Spread Radius:</label>
-              <input type="range" class="form-range" id="spread" min="-50" max="50" value="5">
+              <input type="range" class="form-range custom-range" id="spread" min="-50" max="50" value="5">
             </div>
             <div class="form-group">
               <label for="color">Shadow Color:</label>
@@ -106,7 +156,7 @@
             <div id="shadow-preview">
               <p>Shadow Preview</p>
               <pre id="css-code" class="text-center mt-3"></pre>
-              <button class="btn btn-primary copy-btn" onclick="copyToClipboard()">Copy Code</button>
+              <button class="btn copy-btn" onclick="copyToClipboard()">Copy Code</button>
             </div>
           </div>
         </div>
@@ -144,10 +194,12 @@
         navigator.clipboard.writeText(cssCodeText).then(function() {
           var copyButton = document.querySelector('.copy-btn');
           copyButton.textContent = "Copied!";
+          copyButton.classList.add('copied');
           
           // Revert button text after 5 seconds
           setTimeout(function() {
             copyButton.textContent = "Copy Code";
+            copyButton.classList.remove('copied');
           }, 5000);
         });
       }
