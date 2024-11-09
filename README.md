@@ -2,4 +2,4 @@
 Box Shadow CSS Generator
 
 
-live link : https://shubham110019.github.io/shadow-generator/
+live link : https://shubham-ralli.github.io/shadow-generator
